@@ -21,11 +21,40 @@
 const baseDeDonnees = [];
 
 function signUp(nom, email, password, confirmPassword) {
-	
-}
+    // Vérifie si l'email existe déjà
+    const utilisateurExistant = baseDeDonnees.find(user => user.email === email);
+    if (utilisateurExistant) {
+        return "Erreur: cet email existe déjà";
+    }
 
-function login() {
-	
+    if (password !== confirmPassword) {
+        return "Erreur: les mots de passe ne correspondent pas";
+    }
+    const nouvelUtilisateur = {
+        id: baseDeDonnees.length + 1,
+        nom: nom,
+        email: email,
+        password: password,
+        estConnecte: false,
+        estBloque: false,
+    };
+    baseDeDonnees.push(nouvelUtilisateur);
+    return nouvelUtilisateur;
+
+}
+function login(email, password) {
+    const utilisateur = baseDeDonnees.find(user => user.email === email);
+    if (!utilisateur) {
+        return "Erreur: utilisateur non trouvé";
+    }
+    if (utilisateur.password !== password) {
+        return "Erreur: mot de passe incorrect";
+    }
+    if (utilisateur.estBloque) {
+        return "Erreur: utilisateur bloqué";
+    }
+    utilisateur.estConnecte = true;
+    return utilisateur;
 }
 
 module.exports = { baseDeDonnees, signUp, login };
