@@ -15,7 +15,39 @@
 //     - Moyenne < 10  : "À revoir"
 // Dans le cas où l'élève n'a pas de notes, la moyenne doit être considérée comme 0 et le commentaire "À revoir".
 function showStudentBulletin(eleves) {
-	
+	if (!eleves.notes || eleves.notes.length === 0) {
+		return {
+			nom: eleves.nom,
+			moyenne: 0,
+			commentaire: "À revoir",
+		};
+	}	
+
+	const total = eleve.notes.reduce((somme, note) => somme + note, 0);
+	const moyenne = total / eleve.notes.length;
+	const moyenneArrondie = Number(moyenne.toFixed(2));
+
+		let commentaire;
+		if (moyenneArrondie >= 16) {
+			commentaire = "Excellent";
+		} else if (moyenneArrondie >= 14) {
+			commentaire = "Très Bien";
+		} else if (moyenneArrondie >= 12) {
+			commentaire = "Bien";
+		} else if (moyenneArrondie >= 10) {
+			commentaire = "Passable";
+		} else {
+			commentaire = "À revoir";
+		}
+
+		return {
+			nom: eleve.nom,
+			moyenne: moyenneArrondie,
+			commentaire: commentaire
+		};
+	};
+
+
 }
 
 module.exports = {
