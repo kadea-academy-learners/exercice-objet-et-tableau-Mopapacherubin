@@ -12,8 +12,23 @@ La fonction doit retourner un objet contenant ces trois propriétés :
     - estConnecte (boolean)
 */
 
-function createUser() {
+
+function createUser(nom, age, estConnecte) {
+
+    const nom = typeof nom === "string" ? nom : String(nom ?? "");
+    const age = Number(age) || 0;
+    const estConnecte = (typeof estConnecte === "boolean")
+    ? estConnecte
+    : (String(estConnecte).toLowerCase() === "true");
+
+    return {
+        nom:  nom,
+        age: age,
+        estConnecte: estConnecte
+    };
+
     
+
 }
 
 module.exports = {
